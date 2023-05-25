@@ -1,4 +1,9 @@
 <?php
+
+include __DIR__ . "/tests/EmailSenderServiceTest.php";
+include __DIR__ . "/EmailSenderService.php";
+include __DIR__ . "/User.class.php";
+
 class ToDo{
     private $items;
     public function __construct($items = []){
@@ -11,7 +16,18 @@ class ToDo{
         }
         array_push($this->items, $items);
         if(count($this->items) == 8){
-            //CODE MUTHUS
+            //mock send email
+            $user = new User('test@gmail.com', 'Test', 'Lan', '01/01/1990', 'Test@123');
+
+            $mock = $this->getMockBuilder(EmailSenderService::class)
+                ->onlyMethods(['send'])
+                ->getMock();
+    
+            $mock->expects($this->once())
+                ->method('send')
+                ->with($user);
+    
+            $mock->send($user);  
         }
     }
 
