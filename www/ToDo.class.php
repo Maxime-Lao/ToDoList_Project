@@ -16,18 +16,8 @@ class ToDo{
         }
         array_push($this->items, $items);
         if(count($this->items) == 8){
-            //mock send email
-            $user = new User('test@gmail.com', 'Test', 'Lan', '01/01/1990', 'Test@123');
-
-            $mock = $this->getMockBuilder(EmailSenderService::class)
-                ->onlyMethods(['send'])
-                ->getMock();
-    
-            $mock->expects($this->once())
-                ->method('send')
-                ->with($user);
-    
-            $mock->send($user);  
+            $emailSenderService = new EmailSenderService();
+            $emailSenderService->sendEmail(new User('test@gmail.com', 'Test', 'Lan', '01/01/1990', 'Test@123'));
         }
     }
 

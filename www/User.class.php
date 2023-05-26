@@ -63,4 +63,16 @@ class User{
     public function getToDo(){
         return $this->toDo;
     }
+
+    public function getEmail(){
+        return $this->email;
+    }
+
+    public function getNom(){
+        return $this->nom;
+    }
+
+    public function getPrenom(){
+        return $this->prenom;
+    }
 }

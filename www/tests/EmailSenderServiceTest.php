@@ -13,14 +13,17 @@ class EmailSenderServiceTest extends TestCase
         $user = new User('test@gmail.com', 'Test', 'Lan', '01/01/1990', 'Test@123');
 
         $mock = $this->getMockBuilder(EmailSenderService::class)
-            ->onlyMethods(['send'])
+            ->onlyMethods(['sendEmail'])
             ->getMock();
 
         $mock->expects($this->once())
-            ->method('send')
-            ->with($user);
+            ->method('sendEmail')
+            ->with($user)
+            ->willReturn('Email bien envoyé');
 
-        $mock->send($user);    
+        $output = $mock->sendEmail($user);
+
+        $this->assertEquals('Email bien envoyé', $output);
     }
 }
 
